@@ -1,0 +1,50 @@
+﻿<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.0.7/js/dataTables.foundation.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.foundation.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+
+
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Title</th>
+                <th>PostedAt</th>
+            </tr>
+        </thead>
+    </table>
+    
+<script>
+	/*
+	new DataTable('#example', {
+		ajax: 'https://tonyto.azurewebsites.net/api/GetJobsDB?q=Rider'
+	});
+	*/
+	
+	//https://datatables.net/manual/ajax
+	$('#example').DataTable( {
+    ajax: {
+		url: 'https://tonyto.azurewebsites.net/api/GetJobsDB',
+        //url: 'https://tonyto.azurewebsites.net/api/GetJobsDBSearch?q=ABC',
+        dataSrc: ''
+    },
+    columns: [
+        { data: 'Company' },
+        { data: 'Title' },
+        { data: 'PostedAt' },
+    ],
+    //https://datatables.net/reference/option/columns.width
+    columnDefs: [{ width: '30%', targets: 0 }, { width: '55%', targets: 1 }, { width: '15%', targets: 2 }],
+    order: [[2, 'desc']],
+	lengthMenu: [
+        [20, 100, -1],
+        [20, 100, 'All']
+    ],
+    responsive: true
+} );
+</script>
